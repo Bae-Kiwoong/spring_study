@@ -1,13 +1,39 @@
 package com.example.board;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.board.domain.Post;
+import com.example.board.domain.User;
+
+import com.example.board.service.MemberService;
+import com.example.board.service.PostService;
 
 @SpringBootTest
 class BoardApplicationTests {
+	
+	
+	@Autowired
+	private com.example.board.repository.postRepository postRepository;
+	
+	
 
+	
 	@Test
 	void contextLoads() {
+		
+		List<Post> list = postRepository.findAll();
+		for (Post post : list) {
+			System.out.println(post.getTitle());
+		
+		}
+		
+		
+		
+		
 	}
 
 }

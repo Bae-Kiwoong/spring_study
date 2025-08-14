@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<th:block th:insert="~{fragments/common :: head('타이틀 작성')}"></th:block>
+
+</head>
+<body>
+	<nav th:replace="~{fragments/common :: header}"></nav>
+
+    
+    <!--  실제 작업할 영역 -->
+    <div class="container border py-3 mt-3">
+    <form>
+      <input type="hidden" id="id" th:value="${post.id}" />
+      <div class="mb-3">
+        <label for="title">Title :  </label> 
+        <input type="text" class="form-control" id="title" th:value="${post.title}" >
+      </div>
+      <div class="mb-3">
+        <label for="content">Content : </label>
+        <textarea class="form-control" id="content"></textarea>
+      </div>
+
+    </form>
+
+
+    <hr>
+    <button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
+    <button id="btn-update" class="btn btn-warning">수정완료</button>
+  </div>
+    
+	
+	<div th:replace="~{fragments/common :: footer}"></div>
+	<th:block th:insert="~{fragments/common :: scripts}"></th:block>
+	<script src="/js/post.js"></script>
+	<script th:inline="javascript">
+      /*<![CDATA[*/
+      $(document).ready(function() {
+        $('#content').summernote({
+          height: 400,
+          lang: 'ko-KR',
+          placeholder: '내용을 입력하세요...'
+        });
+        // 서버에서 받은 값을 summernote에 세팅
+        var postContent = /*[[${post.content}]]*/ '';
+        $('#content').summernote('code', postContent);
+      });
+      /*]]>*/
+    </script>
+</body>
+</html>
